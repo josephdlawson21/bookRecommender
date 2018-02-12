@@ -66,3 +66,7 @@ bower.json
 
 # Ignore node_modules
 node_modules/
+
+#ignore API keys
+
+frontend/src/secrets.js
