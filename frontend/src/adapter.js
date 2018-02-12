@@ -7,11 +7,7 @@ const Adapter = (function() {
     static searchBook(searchTerms) {
       let query = searchTerms.split(" ").join("+");
       console.log(query);
-      return fetch(googleBASE + query)
-        .then(response => response.json())
-        .then(json => {
-          console.log(json);
-        });
+      return fetch(googleBASE + query).then(response => response.json());
     }
   };
 })();

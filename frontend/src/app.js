@@ -7,7 +7,9 @@ const App = (function() {
       searchForm.addEventListener("submit", function(event) {
         event.preventDefault();
         let input = document.getElementById("userInputSearch").value;
-        Adapter.searchBook(input);
+        Adapter.searchBook(input).then(json => {
+          console.log(json);
+        });
       });
 
       recForm.addEventListener("submit", function(event) {
