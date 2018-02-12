@@ -7,6 +7,7 @@ const App = (function() {
       searchForm.addEventListener("submit", function(event) {
         event.preventDefault();
         let input = document.getElementById("userInputSearch").value;
+        Adapter.searchBook(input);
       });
 
       recForm.addEventListener("submit", function(event) {
