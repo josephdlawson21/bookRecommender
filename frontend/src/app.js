@@ -6,12 +6,12 @@ const App = (function() {
 
       searchForm.addEventListener("submit", function(event) {
         event.preventDefault();
-        let input = event.target.value;
-        debugger;
+        let input = document.getElementById("userInputSearch").value;
       });
 
       recForm.addEventListener("submit", function(event) {
         event.preventDefault();
+        let input = document.getElementById("userInputRecommend").value;
       });
     }
   };
