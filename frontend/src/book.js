@@ -29,76 +29,56 @@ const Book = (function() {
     }
 
     makeTile() {
-      //create tile elements
-      let bookTile = document.createElement("div");
-      bookTile.class = "bookTile";
-      // let deleteButton = document.createElement("div");
-      // deleteButton.innerText = "X";
-      let left = document.createElement("div");
-      left.class = "left";
-      let bookInfo = document.createElement("ul");
-      bookInfo.class = "bookInfo";
-      let titleLi = document.createElement("li");
-      let authorLi = document.createElement("li");
-      let pubDateLi = document.createElement("li");
-      let avgRatingLi = document.createElement("li");
-      let right = document.createElement("div");
-      left.class = "right";
-      let bookLink = document.createElement("a");
-      let coverImage = document.createElement("img");
-      let results = document.getElementById("resultsA");
+      let card = document.createElement("div");
+      card.className = "card";
 
-      //add specific book data
-      bookLink.href = this.previewLink;
+      //image
+      let cardImageDiv = document.createElement("div");
+      cardImageDiv.className =
+        "card-image waves-effect waves-block waves-light";
+      let cardImage = document.createElement("img");
+      cardImage.className = "activator";
       if (this.imageLink && this.imageLink.thumbnail) {
-        coverImage.src = this.imageLink.thumbnail;
+        cardImage.src = this.imageLink.thumbnail;
       } else {
-        coverImage.src = "https://gph.is/1dKOovp";
+        cardImage.src = "https://gph.is/1dKOovp";
       }
-      coverImage.alt = this.title;
-      titleLi.innerHTML = `Title: ${this.title}`;
+      cardImageDiv.append(cardImage);
+      card.append(cardImageDiv);
 
-      let authorData;
-      if (this.authors) {
-        authorData = this.authors.join(", ");
-      } else {
-        authorData = "Not Listed";
-      }
-      authorLi.innerHTML = `Authors: ${authorData}`; //<- MAKE RENDER ALL AUTHORS
-      pubDateLi.innerHTML = `Published: ${this.publishedDate}`;
-      // avgRating.innerHTML = `Avg Rating: ${this.averageRating}`;
+      //content
+      let cardContentDiv = document.createElement("div");
+      cardContentDiv.className = "card-content";
+      let titleSpan = document.createElement("span");
+      titleSpan.className = "card-title activator grey-text text-darken-4";
+      let materialTrigger = `<i class="material-icons right">more_vert</i>`;
+      titleSpan.innerHTML = this.title + materialTrigger;
+      let gBooksLinkP = document.createElement("p");
+      let gbooksLink = document.createElement("a");
+      gbooksLink.href = this.previewLink;
+      gbooksLink.innerHTML = "View on Google";
+      gBooksLinkP.append(gbooksLink);
+      cardContentDiv.append(titleSpan);
+      cardContentDiv.append(gBooksLinkP);
+      card.append(cardContentDiv);
 
-      //assemble pieces
-      bookInfo.append(titleLi);
-      bookInfo.append(authorLi);
-      bookInfo.append(pubDateLi);
-      // bookInfo.append(avgRatingLi);
-      left.append(bookInfo);
+      let moreInfo = document.createElement("p");
+      moreInfo;
 
-      bookLink.append(coverImage);
-      right.append(bookLink);
-
-      //assemble tile
-      // bookTile.append(deleteButton);
-      bookTile.append(left);
-      bookTile.append(right);
-      results.append(bookTile);
+      document.getElementById("resultsA").append(card);
     }
 
-    // <div class="bookTile">
-    //   <div class="deleteButton">X</div>
-    //   <div class="left">
-    //     <ul class="bookInfo">
-    //       <li>Title</li>
-    //       <li>Author</li>
-    //       <li>Publication Date</li>
-    //       <li>Avg Rating:</li>
-    //     </ul>
+    //   <div class="card">
+    //   <div class="card-image waves-effect waves-block waves-light">
+    //     <img class="activator" src="images/office.jpg">
     //   </div>
-    //   <div class="right">
-    //     <a href="#">
-    //       <img src="" alt="book_cover">
-    //     </a>
+    //   <div class="card-content">
+    //     <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+    //     <p><a href="#">This is a link</a></p>
+    //   </div>
+    //   <div class="card-reveal">
+    //     <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+    //     <p>Here is some more information about this product that is only revealed once clicked on.</p>
     //   </div>
     // </div>
   };

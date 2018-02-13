@@ -3,39 +3,51 @@
   <head>
     <meta charset="utf-8">
     <title>BookWorm</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="bookworm.css">
   </head>
   <body>
-    <div id='header'>
-      <div id="logo">
+
+    <nav>
+    <div id='header' class='nav-wrapper'>
+      <a id="logo" class= "brand-logo">BookWorm
+      </a>
+      <ul id="userArea" class= "right hide-on-med-and-down">
+        <li>USER STUFF</li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+  <div id="search">
+    <div class="row">
+      <div class="col s6">
+        <form id="searchBar" class="" action="index.html" method="post">
+          <input type="text" id="userInputSearch" name="userInputSearch" value="">
+          <input type="submit" name="submitSearch" class="btn waves-effect waves-light" value="Search">
+        </form>
       </div>
-      <div id="userArea">
+      <div class="col s6">
+        <form id="recommendBar" class="" action="index.html" method="post">
+          <input type="text" id="userInputRecommend" name="userInputRecommend" value="">
+          <input type="submit" name="submitRecommend" class="btn waves-effect waves-light" value="Recommend">
+        </form>
       </div>
     </div>
-    <div id="search">
-      <form id="searchBar" class="" action="index.html" method="post">
-        <input type="text" id="userInputSearch" name="userInputSearch" value="">
-        <input type="submit" name="submitSearch" value="Search!">
-      </form>
-      <form id="recommendBar" class="" action="index.html" method="post">
-        <input type="text" id="userInputRecommend" name="userInputRecommend" value="">
-        <input type="submit" name="submitRecommend" value="Recommend!">
-      </form>
+  </div>
 
       <div id="resultsA">
 
       </div>
-    </div>
     <div id="bookshelf">
 
     </div>
-    <script type="text/javascript" src="src/secrets.js"></script>
-    <script type="text/javascript" src="src/adapter.js"></script>
-    <script type="text/javascript" src="src/book.js"></script>
-    <script type="text/javascript" src="src/user.js"></script>
-    <script type="text/javascript" src="src/app.js"></script>
-    <script type="text/javascript" src="src/index.js"></script>
-
-
-    </script>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script type="text/javascript" src="src/secrets.js"></script>
+  <script type="text/javascript" src="src/adapter.js"></script>
+  <script type="text/javascript" src="src/book.js"></script>
+  <script type="text/javascript" src="src/user.js"></script>
+  <script type="text/javascript" src="src/app.js"></script>
+  <script type="text/javascript" src="src/index.js"></script>
   </body>
 </html>
