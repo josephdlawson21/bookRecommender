@@ -56,7 +56,7 @@ const Book = (function() {
       gbooksLink.href = this.previewLink;
       gbooksLink.innerHTML = "View on Google";
       gBooksLinkP.append(gbooksLink);
-      titleSpan.append(addButton);
+      cardContentDiv.append(addButton);
       cardContentDiv.append(titleSpan);
       cardContentDiv.append(gBooksLinkP);
       card.append(cardContentDiv);
