@@ -1,4 +1,20 @@
+#wormImage {
+  height: 60px;
+  width: 60px;
+}
+
+.spanFix {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .card img {
   height: 300px;
   object-fit: contain;
+}
+
+.btn-fix {
+  line-height: inherit !important;
 }

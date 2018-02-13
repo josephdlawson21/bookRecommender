@@ -51,7 +51,7 @@ const App = (function() {
           imageLink: bookObj["volumeInfo"]["imageLinks"]
         };
         let newBook = new Book(bookParams);
-        newBook.render();
+        newBook.renderSearch();
       });
     }
 

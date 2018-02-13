@@ -22,11 +22,7 @@ const Book = (function() {
         (this.description = description);
     }
 
-    render() {
-      this.makeTile();
-    }
-
-    makeTile() {
+    renderSearch() {
       let card = document.createElement("div");
       card.className = "card col s12 m6 l4";
 
@@ -48,15 +44,19 @@ const Book = (function() {
       let cardContentDiv = document.createElement("div");
       cardContentDiv.className = "card-content";
       let titleSpan = document.createElement("span");
-      titleSpan.className = "card-title grey-text text-darken-4";
-      let materialTrigger =
-        '<i class="add-to-library material-icons right">add</i>';
-      titleSpan.innerHTML = this.title + materialTrigger;
+      titleSpan.className =
+        "card-title grey-text text-darken-4 flow-text spanFix";
+      titleSpan.innerHTML = this.title;
+      let addButton = document.createElement("a");
+      addButton.className =
+        "btn-floating right z-depth-4 waves-effect waves-light red";
+      addButton.innerHTML = '<i class="material-icons btn-fix">add</i></a>';
       let gBooksLinkP = document.createElement("p");
       let gbooksLink = document.createElement("a");
       gbooksLink.href = this.previewLink;
       gbooksLink.innerHTML = "View on Google";
       gBooksLinkP.append(gbooksLink);
+      titleSpan.append(addButton);
       cardContentDiv.append(titleSpan);
       cardContentDiv.append(gBooksLinkP);
       card.append(cardContentDiv);
@@ -66,9 +66,9 @@ const Book = (function() {
       moreContent.className = "card-reveal";
 
       let materialTriggerBack =
-        '<i class="add-to-library material-icons right">add</i>';
+        '<i class="add-to-library material-icons right">close</i>';
       let backSpan = document.createElement("span");
-      backSpan.className = "card-title grey-text text-darken-4";
+      backSpan.className = "card-title grey-text text-darken-4 flow-text";
       backSpan.innerHTML = this.title + materialTriggerBack;
 
       let moreInfo = document.createElement("p");
@@ -86,11 +86,5 @@ const Book = (function() {
 
       document.getElementById("resultsA").append(card);
     }
-
-    //   <div class="card-reveal">
-    //     <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-    //     <p>Here is some more information about this product that is only revealed once clicked on.</p>
-    //   </div>
-    // </div>
   };
 })();
