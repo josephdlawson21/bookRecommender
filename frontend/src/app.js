@@ -47,6 +47,7 @@ const App = (function() {
           authors: bookObj.volumeInfo.authors,
           publishedDate: bookObj.volumeInfo.publishedDate,
           averageRating: bookObj.volumeInfo.averageRating,
+          description: bookObj.volumeInfo.description,
           imageLink: bookObj["volumeInfo"]["imageLinks"]
         };
         let newBook = new Book(bookParams);

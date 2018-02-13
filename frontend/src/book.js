@@ -8,7 +8,8 @@ const Book = (function() {
       publishedDate,
       averageRating,
       imageLink,
-      previewLink
+      previewLink,
+      description
     }) {
       (this.id = id),
         (this.googleId = googleId),
@@ -17,14 +18,11 @@ const Book = (function() {
         (this.publishedDate = publishedDate),
         (this.averageRating = averageRating),
         (this.imageLink = imageLink),
-        (this.previewLink = previewLink);
+        (this.previewLink = previewLink),
+        (this.description = description);
     }
 
     render() {
-      // let li = document.createElement("li");
-      // let results = document.getElementById("resultsA");
-      // li.innerText = this.makeTile();
-      // results.append(li);
       this.makeTile();
     }
 
@@ -41,7 +39,7 @@ const Book = (function() {
       if (this.imageLink && this.imageLink.thumbnail) {
         cardImage.src = this.imageLink.thumbnail;
       } else {
-        cardImage.src = "https://gph.is/1dKOovp";
+        cardImage.src = "https://media.giphy.com/media/9J7tdYltWyXIY/giphy.gif";
       }
       cardImageDiv.append(cardImage);
       card.append(cardImageDiv);
@@ -51,7 +49,7 @@ const Book = (function() {
       cardContentDiv.className = "card-content";
       let titleSpan = document.createElement("span");
       titleSpan.className = "card-title activator grey-text text-darken-4";
-      let materialTrigger = `<i class="material-icons right">more_vert</i>`;
+      let materialTrigger = '<i class="material-icons right">more_vert</i>';
       titleSpan.innerHTML = this.title + materialTrigger;
       let gBooksLinkP = document.createElement("p");
       let gbooksLink = document.createElement("a");
@@ -62,20 +60,31 @@ const Book = (function() {
       cardContentDiv.append(gBooksLinkP);
       card.append(cardContentDiv);
 
+      //back of card
+      let moreContent = document.createElement("div");
+      moreContent.className = "card-reveal";
+
+      let materialTriggerBack = '<i class="material-icons right">close</i>';
+      let backSpan = document.createElement("span");
+      backSpan.className = "card-title grey-text text-darken-4";
+      backSpan.innerHTML = this.title + materialTriggerBack;
+
       let moreInfo = document.createElement("p");
-      moreInfo;
+
+      if (this.description) {
+        moreInfo.innerHTML = this.description;
+      } else {
+        moreInfo.innerHTML = "No Information Available.";
+      }
+
+      moreContent.append(backSpan);
+      moreContent.append(moreInfo);
+
+      card.append(moreContent);
 
       document.getElementById("resultsA").append(card);
     }
 
-    //   <div class="card">
-    //   <div class="card-image waves-effect waves-block waves-light">
-    //     <img class="activator" src="images/office.jpg">
-    //   </div>
-    //   <div class="card-content">
-    //     <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-    //     <p><a href="#">This is a link</a></p>
-    //   </div>
     //   <div class="card-reveal">
     //     <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
     //     <p>Here is some more information about this product that is only revealed once clicked on.</p>
