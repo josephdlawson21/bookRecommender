@@ -12,11 +12,9 @@ const Adapter = (function() {
 
     static recommendBooks(searchTerms) {
       let query = searchTerms.split(" ").join("+");
-      return fetch(tasteBase + query + tasteDive)
-        .then(response => response.json())
-        .then(json => {
-          console.log(json);
-        });
+      return fetch(tasteBase + query + tasteDive).then(response =>
+        response.json()
+      );
     }
   };
 })();
