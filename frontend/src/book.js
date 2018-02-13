@@ -28,7 +28,7 @@ const Book = (function() {
 
     makeTile() {
       let card = document.createElement("div");
-      card.className = "card";
+      card.className = "card col s12 m6 l4";
 
       //image
       let cardImageDiv = document.createElement("div");
@@ -48,8 +48,9 @@ const Book = (function() {
       let cardContentDiv = document.createElement("div");
       cardContentDiv.className = "card-content";
       let titleSpan = document.createElement("span");
-      titleSpan.className = "card-title activator grey-text text-darken-4";
-      let materialTrigger = '<i class="material-icons right">more_vert</i>';
+      titleSpan.className = "card-title grey-text text-darken-4";
+      let materialTrigger =
+        '<i class="add-to-library material-icons right">add</i>';
       titleSpan.innerHTML = this.title + materialTrigger;
       let gBooksLinkP = document.createElement("p");
       let gbooksLink = document.createElement("a");
@@ -64,7 +65,8 @@ const Book = (function() {
       let moreContent = document.createElement("div");
       moreContent.className = "card-reveal";
 
-      let materialTriggerBack = '<i class="material-icons right">close</i>';
+      let materialTriggerBack =
+        '<i class="add-to-library material-icons right">add</i>';
       let backSpan = document.createElement("span");
       backSpan.className = "card-title grey-text text-darken-4";
       backSpan.innerHTML = this.title + materialTriggerBack;

@@ -9,7 +9,7 @@ const App = (function() {
         App.clearSearchResults();
         let input = document.getElementById("userInputSearch").value;
         Adapter.searchBook(input).then(json => {
-          let topFive = json.items.slice(0, 5);
+          let topFive = json.items.slice(0, 6);
           App.parseJson(topFive);
         });
         App.clearInputFields();
@@ -20,7 +20,7 @@ const App = (function() {
         App.clearSearchResults();
         let input = document.getElementById("userInputRecommend").value;
         Adapter.recommendBooks(input).then(resultJson => {
-          let topFive = resultJson.Similar.Results.slice(0, 5);
+          let topFive = resultJson.Similar.Results.slice(0, 6);
           if (topFive.length === 0) {
             // TODO: Add a function to pit a book not found div on page
             // Book.bookNotFound();
