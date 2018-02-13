@@ -6,49 +6,59 @@ const App = (function() {
 
       searchForm.addEventListener("submit", function(event) {
         event.preventDefault();
+        App.clearSearchResults();
         let input = document.getElementById("userInputSearch").value;
         Adapter.searchBook(input).then(json => {
           let topFive = json.items.slice(0, 5);
-          topFive.map(function(bookJSON) {
-            let bookParams = {
-              googleId: bookJSON.id,
-              title: bookJSON.volumeInfo.title,
-              authors: bookJSON.volumeInfo.authors,
-              publishedDate: bookJSON.volumeInfo.publishedDate,
-              averageRating: bookJSON.volumeInfo.averageRating,
-              imageLink: bookJSON["volumeInfo"]["imageLinks"]
-            };
-            let newBook = new Book(bookParams);
-            newBook.render();
-          });
+          App.parseJson(topFive);
         });
+        App.clearInputFields();
       });
 
       recForm.addEventListener("submit", function(event) {
         event.preventDefault();
+        App.clearSearchResults();
         let input = document.getElementById("userInputRecommend").value;
         Adapter.recommendBooks(input).then(resultJson => {
           let topFive = resultJson.Similar.Results.slice(0, 5);
-          topFive.map(function(bookJSON) {
-            let search = bookJSON.Name;
-            Adapter.searchBook(search).then(json => {
-              let googleTopFive = json.items.slice(0, 1);
-              googleTopFive.map(function(bookJSON) {
-                let bookParams = {
-                  googleId: bookJSON.id,
-                  title: bookJSON.volumeInfo.title,
-                  authors: bookJSON.volumeInfo.authors,
-                  publishedDate: bookJSON.volumeInfo.publishedDate,
-                  averageRating: bookJSON.volumeInfo.averageRating,
-                  imageLink: bookJSON["volumeInfo"]["imageLinks"]
-                };
-                let newBook = new Book(bookParams);
-                newBook.render();
+          if (topFive.length === 0) {
+            // TODO: Add a function to pit a book not found div on page
+            // Book.bookNotFound();
+          } else {
+            topFive.map(function(bookJSON) {
+              let search = bookJSON.Name;
+              Adapter.searchBook(search).then(json => {
+                let googleTopFive = json.items.slice(0, 1);
+                App.parseJson(googleTopFive);
               });
             });
-          });
+          }
         });
+        App.clearInputFields();
       });
+    }
+
+    static parseJson(bookJSON) {
+      bookJSON.map(function(bookObj) {
+        let bookParams = {
+          googleId: bookObj.id,
+          title: bookObj.volumeInfo.title,
+          authors: bookObj.volumeInfo.authors,
+          publishedDate: bookObj.volumeInfo.publishedDate,
+          averageRating: bookObj.volumeInfo.averageRating,
+          imageLink: bookObj["volumeInfo"]["imageLinks"]
+        };
+        let newBook = new Book(bookParams);
+        newBook.render();
+      });
+    }
+
+    static clearSearchResults() {
+      document.getElementById("resultsA").innerHTML = "";
+    }
+    static clearInputFields() {
+      document.getElementById("userInputSearch").value = "";
+      document.getElementById("userInputRecommend").value = "";
     }
   };
 })();
