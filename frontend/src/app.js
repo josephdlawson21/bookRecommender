@@ -40,7 +40,9 @@ const App = (function() {
 
     static parseJson(bookJSON) {
       bookJSON.map(function(bookObj) {
+        console.log(bookObj);
         let bookParams = {
+          previewLink: bookObj.volumeInfo.previewLink,
           googleId: bookObj.id,
           title: bookObj.volumeInfo.title,
           authors: bookObj.volumeInfo.authors,

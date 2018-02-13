@@ -7,7 +7,8 @@ const Book = (function() {
       authors,
       publishedDate,
       averageRating,
-      imageLink
+      imageLink,
+      previewLink
     }) {
       (this.id = id),
         (this.googleId = googleId),
@@ -15,7 +16,8 @@ const Book = (function() {
         (this.authors = authors),
         (this.publishedDate = publishedDate),
         (this.averageRating = averageRating),
-        (this.imageLink = imageLink);
+        (this.imageLink = imageLink),
+        (this.previewLink = previewLink);
     }
 
     render() {
