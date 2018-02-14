@@ -45,11 +45,14 @@ const Adapter = (function() {
     }
 
     static deleteBook(userId, bookId) {
-      fetch(apiLogIn + userId + "/books/" + bookId, {
-        method: "DELETE"
-      }).then(res => {
-        console.log(res.json());
-      });
+      let params = { userId: userId, id: bookId };
+      return fetch(apiLogIn + userId + "/books/" + bookId, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(params)
+      }).then(response => response.json());
     }
   };
 })();

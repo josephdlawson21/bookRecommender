@@ -135,15 +135,12 @@ const Book = (function() {
       deleteButton.addEventListener("click", function() {
         let bookId = event.target.parentElement.dataset.bookId;
         let userId = document.getElementById("userP").dataset.userId;
-
-        console.log("bookid:", bookId, "userid:", userId);
-
-        Adapter.deleteBook(userId, bookId);
-        // .then(json => {
-        //   let bookShelf = document.getElementById("bookshelf");
-        //   bookShelf.innerHTML = "";
-        //   App.parseBookshelfJson(json);
-        // });
+        Adapter.deleteBook(userId, bookId)
+        .then(json => {
+          let bookShelf = document.getElementById("bookshelf");
+          bookShelf.innerHTML = "";
+          App.parseBookshelfJson(json);
+        });
       });
 
       deleteButton.className =
