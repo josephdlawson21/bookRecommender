@@ -100,7 +100,7 @@ const Book = (function() {
       document.getElementById("resultsA").append(card);
     }
 
-    bookshelfRender(bookId) {
+    bookshelfRender(bookIdA) {
       let card = document.createElement("div");
       card.className = "card col s12 m6 l4";
 
@@ -127,12 +127,12 @@ const Book = (function() {
       titleSpan.innerHTML = this.title;
       let deleteButton = document.createElement("a");
       deleteButton.dataset.googleId = this.googleId;
-      deleteButton.dataset.bookId = bookId;
+      deleteButton.dataset.bookId = bookIdA;
 
       //event listener for add book button
       deleteButton.addEventListener("click", function() {
         let bookId = event.target.parentElement.dataset.bookId;
-        let userId = document.getElementById("userP").dataset.userId;
+        let userId = document.getElementById("userP").dataset.id;
         Adapter.deleteBook(userId, bookId).then(json => {
           let bookShelf = document.getElementById("bookshelf");
           bookShelf.innerHTML = "";

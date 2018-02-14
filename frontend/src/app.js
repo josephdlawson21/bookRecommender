@@ -90,7 +90,7 @@ const App = (function() {
             let jsonObj = json.items;
             return App.parseJson(jsonObj);
           })
-          .then(book => book[0].bookshelfRender());
+          .then(book => book[0].bookshelfRender(bookId));
       });
     }
 
