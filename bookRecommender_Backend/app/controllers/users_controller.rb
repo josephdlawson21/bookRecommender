@@ -16,8 +16,13 @@ class UsersController < ApplicationController
   end
 
   def postBook
-    @book = Book.create(googleId: params[:googleId])
-    @user.books << @book
+    @book = Book.find_or_create_by(googleId: params[:googleId])
+    if @user.books.include?(@book)
+
+    else
+      @user.books << @book
+    end
+
     render json: @user.books, status: 200
 
   end
