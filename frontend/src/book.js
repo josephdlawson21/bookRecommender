@@ -67,6 +67,7 @@ const Book = (function() {
       let gBooksLinkP = document.createElement("p");
       let gbooksLink = document.createElement("a");
       gbooksLink.href = this.previewLink;
+      gbooksLink.setAttribute("target", "_blank");
       gbooksLink.innerHTML = "View on Google";
       gBooksLinkP.append(gbooksLink);
       cardContentDiv.append(addButton);
@@ -149,6 +150,7 @@ const Book = (function() {
       let gbooksLink = document.createElement("a");
       gbooksLink.href = this.previewLink;
       gbooksLink.innerHTML = "View on Google";
+      gbooksLink.setAttribute("target", "_blank");
       gBooksLinkP.append(gbooksLink);
       cardContentDiv.append(deleteButton);
       cardContentDiv.append(titleSpan);
