@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get '/users/:id/books', to: 'users#getBooks'
   post '/users/:id/books', to: 'users#postBook'
+  delete '/users/:id/books/:id', to: 'users#deleteBook'
 
 
 end

@@ -27,6 +27,12 @@ class UsersController < ApplicationController
 
   end
 
+  def deleteBook
+    @user_book = UserBook.find_by(user_id: params[:userId], book_id: params[:id])
+    UserBook.destroy(@user_book.id)
+    render status: 200
+  end
+
   private
 
   def find_user

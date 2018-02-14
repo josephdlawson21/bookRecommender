@@ -43,5 +43,13 @@ const Adapter = (function() {
         body: JSON.stringify(bookParams)
       }).then(response => response.json());
     }
+
+    static deleteBook(userId, bookId) {
+      fetch(apiLogIn + userId + "/books/" + bookId, {
+        method: "DELETE"
+      }).then(res => {
+        console.log(res.json());
+      });
+    }
   };
 })();

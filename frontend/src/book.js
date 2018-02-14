@@ -48,12 +48,12 @@ const Book = (function() {
         "card-title grey-text text-darken-4 flow-text spanFix";
       titleSpan.innerHTML = this.title;
       let addButton = document.createElement("a");
-      addButton.dataset.id = this.googleId;
+      addButton.dataset.googleId = this.googleId;
 
       ///////// event listener for add book button //////////
       addButton.addEventListener("click", function() {
-        let bookId = event.target.parentElement.dataset.id;
-        let userId = document.getElementById("userP").dataset.id;
+        let bookId = event.target.parentElement.dataset.googleId;
+        let userId = document.getElementById("userP").dataset.userId;
         Adapter.addBook(userId, bookId).then(json => {
           let bookShelf = document.getElementById("bookshelf");
           bookShelf.innerHTML = "";
@@ -101,7 +101,8 @@ const Book = (function() {
       console.log(document.querySelectorAll(".bookShelf"));
     }
 
-    bookshelfRender() {
+    bookshelfRender(bookId) {
+      console.log(bookId);
       let card = document.createElement("div");
       card.className = "card col s12 m6 l4";
 
@@ -126,17 +127,36 @@ const Book = (function() {
       titleSpan.className =
         "card-title grey-text text-darken-4 flow-text spanFix";
       titleSpan.innerHTML = this.title;
-      let addButton = document.createElement("a");
-      addButton.className =
+      let deleteButton = document.createElement("a");
+      deleteButton.dataset.googleId = this.googleId;
+      deleteButton.dataset.bookId = bookId;
+
+      ///////// event listener for add book button //////////
+      deleteButton.addEventListener("click", function() {
+        let bookId = event.target.parentElement.dataset.bookId;
+        let userId = document.getElementById("userP").dataset.userId;
+
+        console.log("bookid:", bookId, "userid:", userId);
+
+        Adapter.deleteBook(userId, bookId);
+        // .then(json => {
+        //   let bookShelf = document.getElementById("bookshelf");
+        //   bookShelf.innerHTML = "";
+        //   App.parseBookshelfJson(json);
+        // });
+      });
+
+      deleteButton.className =
         "btn-floating right z-depth-4 waves-effect waves-light red removeFromBookshelf";
       ////////////////////////////   make delete button work /////////////////////////////////////////
-      addButton.innerHTML = '<i class="material-icons btn-fix">delete</i></a>';
+      deleteButton.innerHTML =
+        '<i class="material-icons btn-fix">delete</i></a>';
       let gBooksLinkP = document.createElement("p");
       let gbooksLink = document.createElement("a");
       gbooksLink.href = this.previewLink;
       gbooksLink.innerHTML = "View on Google";
       gBooksLinkP.append(gbooksLink);
-      cardContentDiv.append(addButton);
+      cardContentDiv.append(deleteButton);
       cardContentDiv.append(titleSpan);
       cardContentDiv.append(gBooksLinkP);
       card.append(cardContentDiv);
