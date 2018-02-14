@@ -5353,3 +5353,19 @@ Processing by UsersController#getBooks as */*
 Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.2ms)
 
 
+Started POST "/users/" for 127.0.0.1 at 2018-02-14 15:43:06 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"john", "user"=>{"name"=>"john"}}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "john"], ["LIMIT", 1]]
+Completed 200 OK in 18ms (Views: 3.1ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/users/1/books" for 127.0.0.1 at 2018-02-14 15:43:06 -0500
+Processing by UsersController#getBooks as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBook Load (0.1ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "user_books" ON "books"."id" = "user_books"."book_id" WHERE "user_books"."user_id" = ?[0m  [["user_id", 1]]
+Completed 200 OK in 12ms (Views: 9.3ms | ActiveRecord: 0.4ms)
+
+

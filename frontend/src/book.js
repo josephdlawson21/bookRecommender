@@ -98,11 +98,9 @@ const Book = (function() {
       card.append(moreContent);
 
       document.getElementById("resultsA").append(card);
-      console.log(document.querySelectorAll(".bookShelf"));
     }
 
     bookshelfRender(bookId) {
-      console.log(bookId);
       let card = document.createElement("div");
       card.className = "card col s12 m6 l4";
 
@@ -131,12 +129,11 @@ const Book = (function() {
       deleteButton.dataset.googleId = this.googleId;
       deleteButton.dataset.bookId = bookId;
 
-      ///////// event listener for add book button //////////
+      //event listener for add book button
       deleteButton.addEventListener("click", function() {
         let bookId = event.target.parentElement.dataset.bookId;
         let userId = document.getElementById("userP").dataset.userId;
-        Adapter.deleteBook(userId, bookId)
-        .then(json => {
+        Adapter.deleteBook(userId, bookId).then(json => {
           let bookShelf = document.getElementById("bookshelf");
           bookShelf.innerHTML = "";
           App.parseBookshelfJson(json);
@@ -145,7 +142,7 @@ const Book = (function() {
 
       deleteButton.className =
         "btn-floating right z-depth-4 waves-effect waves-light red removeFromBookshelf";
-      ////////////////////////////   make delete button work /////////////////////////////////////////
+      // event listener for delete button
       deleteButton.innerHTML =
         '<i class="material-icons btn-fix">delete</i></a>';
       let gBooksLinkP = document.createElement("p");
