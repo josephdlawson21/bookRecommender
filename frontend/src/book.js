@@ -48,9 +48,21 @@ const Book = (function() {
         "card-title grey-text text-darken-4 flow-text spanFix";
       titleSpan.innerHTML = this.title;
       let addButton = document.createElement("a");
+      addButton.dataset.id = this.googleId;
+
+      ///////// event listener for add book button //////////
+      addButton.addEventListener("click", function() {
+        let bookId = event.target.parentElement.dataset.id;
+        let userId = document.getElementById("userP").dataset.id;
+        Adapter.addBook(userId, bookId).then(json => {
+          let bookShelf = document.getElementById("bookshelf");
+          bookShelf.innerHTML = "";
+          App.parseBookshelfJson(json);
+        });
+      });
+
       addButton.className =
-        "btn-floating right z-depth-4 waves-effect waves-light red";
-      //////////////////// make add button work ////////////////////////
+        "btn-floating right z-depth-4 waves-effect waves-light red bookShelf";
       addButton.innerHTML = '<i class="material-icons btn-fix">add</i></a>';
       let gBooksLinkP = document.createElement("p");
       let gbooksLink = document.createElement("a");
@@ -86,6 +98,7 @@ const Book = (function() {
       card.append(moreContent);
 
       document.getElementById("resultsA").append(card);
+      console.log(document.querySelectorAll(".bookShelf"));
     }
 
     bookshelfRender() {
@@ -115,7 +128,7 @@ const Book = (function() {
       titleSpan.innerHTML = this.title;
       let addButton = document.createElement("a");
       addButton.className =
-        "btn-floating right z-depth-4 waves-effect waves-light red";
+        "btn-floating right z-depth-4 waves-effect waves-light red removeFromBookshelf";
       ////////////////////////////   make delete button work /////////////////////////////////////////
       addButton.innerHTML = '<i class="material-icons btn-fix">delete</i></a>';
       let gBooksLinkP = document.createElement("p");

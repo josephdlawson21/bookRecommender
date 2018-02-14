@@ -33,9 +33,15 @@ const Adapter = (function() {
       return fetch(apiLogIn + id + "/books").then(response => response.json());
     }
 
-    static addBook() {
-      return fetch(apiLogIn + id + "/books").then(response => response.json());
-      let book = "";
+    static addBook(id, bookId) {
+      let bookParams = { googleId: bookId };
+      return fetch(apiLogIn + id + "/books", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(bookParams)
+      }).then(response => response.json());
     }
   };
 })();
