@@ -8,7 +8,9 @@ const Adapter = (function() {
   return class Adapter {
     static searchBook(searchTerms) {
       let query = searchTerms.split(" ").join("+");
-      return fetch(googleBASE + query).then(response => response.json());
+      return fetch(googleBASE + query + GoogleBooks).then(response =>
+        response.json()
+      );
     }
 
     static recommendBooks(searchTerms) {
