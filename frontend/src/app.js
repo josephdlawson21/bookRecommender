@@ -11,9 +11,16 @@ const App = (function() {
         App.clearSearchResults();
         let input = document.getElementById("userInputSearch").value;
         Adapter.searchBook(input).then(json => {
-          let topFive = json.items.slice(0, 6);
-          let bookArr = App.parseJson(topFive);
-          App.renderSearchArr(bookArr);
+          if (json.items) {
+            let topFive = json.items.slice(0, 6);
+            let bookArr = App.parseJson(topFive);
+            App.renderSearchArr(bookArr);
+          } else {
+            let ul = document.getElementById("resultsA");
+            let p = document.createElement("p");
+            p.innerText = "no results";
+            ul.append(p);
+          }
         });
         App.clearInputFields();
       });
@@ -26,7 +33,10 @@ const App = (function() {
         Adapter.recommendBooks(input).then(resultJson => {
           let topFive = resultJson.Similar.Results.slice(0, 6);
           if (topFive.length === 0) {
-            // TODO: Add a function to pit a book not found div on page
+            let ul = document.getElementById("resultsA");
+            let p = document.createElement("p");
+            p.innerText = "no results";
+            ul.append(p);
             // Book.bookNotFound();
           } else {
             topFive.map(function(bookJSON) {
