@@ -49,7 +49,7 @@ const App = (function() {
           // takes search bar off page and enters welcome message in navbar
           let userId = json.id;
           event.target.innerHTML = `<p id="userP">Hello, ${userName}!</p>`;
-          document.getElementById("userP").dataset.userId = userId;
+          document.getElementById("userP").dataset.id = userId;
 
           // loads user books
           Adapter.getBooks(userId).then(json => {
@@ -90,7 +90,7 @@ const App = (function() {
             let jsonObj = json.items;
             return App.parseJson(jsonObj);
           })
-          .then(book => book[0].bookshelfRender(bookId));
+          .then(book => book[0].bookshelfRender());
       });
     }
 

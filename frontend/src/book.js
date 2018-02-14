@@ -53,7 +53,7 @@ const Book = (function() {
       ///////// event listener for add book button //////////
       addButton.addEventListener("click", function() {
         let bookId = event.target.parentElement.dataset.googleId;
-        let userId = document.getElementById("userP").dataset.userId;
+        let userId = document.getElementById("userP").dataset.id;
         Adapter.addBook(userId, bookId).then(json => {
           let bookShelf = document.getElementById("bookshelf");
           bookShelf.innerHTML = "";
