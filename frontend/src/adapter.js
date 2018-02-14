@@ -3,6 +3,7 @@ const Adapter = (function() {
   const GoogleBooks = googleKey();
   const googleBASE = "https://www.googleapis.com/books/v1/volumes?&q=";
   const tasteBase = "https://tastedive.com/api/similar?type=books&q=";
+  const apiLogIn = "http://localhost:3000/users/";
 
   return class Adapter {
     static searchBook(searchTerms) {
@@ -15,6 +16,27 @@ const Adapter = (function() {
       return fetch(tasteBase + query + tasteDive).then(response =>
         response.json()
       );
+    }
+
+    static logIn(userName) {
+      let userParams = { name: userName };
+      console.log(userParams);
+      return fetch(apiLogIn, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userParams)
+      }).then(response => response.json());
+    }
+
+    static getBooks(id) {
+      return fetch(apiLogIn + id + "/books").then(response => response.json());
+    }
+
+    static addBook() {
+      return fetch(apiLogIn + id + "/books").then(response => response.json());
+      let book = "";
     }
   };
 })();

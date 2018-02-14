@@ -3,7 +3,9 @@ const App = (function() {
     static init() {
       const searchForm = document.getElementById("searchBar");
       const recForm = document.getElementById("recommendBar");
+      const logIn = document.getElementById("logIn");
 
+      //event listener for search book
       searchForm.addEventListener("submit", function(event) {
         event.preventDefault();
         App.clearSearchResults();
@@ -15,6 +17,7 @@ const App = (function() {
         App.clearInputFields();
       });
 
+      //event listener for recomend book
       recForm.addEventListener("submit", function(event) {
         event.preventDefault();
         App.clearSearchResults();
@@ -36,8 +39,24 @@ const App = (function() {
         });
         App.clearInputFields();
       });
+
+      logIn.addEventListener("submit", function(event) {
+        event.preventDefault();
+        let userName = document.getElementById("userName").value;
+        Adapter.logIn(userName).then(json => {
+          // takes search bar off page and enters welcome message in navbar
+          let userId = json.id;
+          event.target.innerHTML = `<p id="userP">Hello, ${userName}!</p>`;
+          document.getElementById("userP").dataset.id = userId;
+
+          // loads user books
+        });
+      });
     }
 
+    //////////   HELPER METHODS  ////////////////////////////////////////////////
+
+    // creates a book object from the search/recommend json and renders
     static parseJson(bookJSON) {
       bookJSON.map(function(bookObj) {
         let bookParams = {
@@ -61,6 +80,9 @@ const App = (function() {
     static clearInputFields() {
       document.getElementById("userInputSearch").value = "";
       document.getElementById("userInputRecommend").value = "";
+    }
+    static clearLogin() {
+      document.getElementById("userName").value = "";
     }
   };
 })();
