@@ -20,7 +20,6 @@ const Adapter = (function() {
 
     static logIn(userName) {
       let userParams = { name: userName };
-      console.log(userParams);
       return fetch(apiLogIn, {
         method: "POST",
         headers: {

@@ -12,7 +12,8 @@ const App = (function() {
         let input = document.getElementById("userInputSearch").value;
         Adapter.searchBook(input).then(json => {
           let topFive = json.items.slice(0, 6);
-          App.parseJson(topFive);
+          let bookArr = App.parseJson(topFive);
+          App.renderSearchArr(bookArr);
         });
         App.clearInputFields();
       });
@@ -32,7 +33,8 @@ const App = (function() {
               let search = bookJSON.Name;
               Adapter.searchBook(search).then(json => {
                 let googleTopFive = json.items.slice(0, 1);
-                App.parseJson(googleTopFive);
+                let bookArr = App.parseJson(googleTopFive);
+                App.renderSearchArr(bookArr);
               });
             });
           }
@@ -50,6 +52,9 @@ const App = (function() {
           document.getElementById("userP").dataset.id = userId;
 
           // loads user books
+          Adapter.getBooks(userId).then(json => {
+            App.parseBookshelfJson(json);
+          });
         });
       });
     }
@@ -58,7 +63,7 @@ const App = (function() {
 
     // creates a book object from the search/recommend json and renders
     static parseJson(bookJSON) {
-      bookJSON.map(function(bookObj) {
+      return bookJSON.map(function(bookObj) {
         let bookParams = {
           previewLink: bookObj.volumeInfo.previewLink,
           googleId: bookObj.id,
@@ -69,8 +74,22 @@ const App = (function() {
           description: bookObj.volumeInfo.description,
           imageLink: bookObj["volumeInfo"]["imageLinks"]
         };
-        let newBook = new Book(bookParams);
-        newBook.renderSearch();
+        return new Book(bookParams);
+      });
+    }
+
+    static renderSearchArr(bookArr) {
+      bookArr.forEach(bookObj => bookObj.renderSearch());
+    }
+
+    static parseBookshelfJson(apiJson) {
+      apiJson.forEach(obj => {
+        Adapter.searchBook(obj.googleId)
+          .then(json => {
+            let jsonObj = json.items;
+            return App.parseJson(jsonObj);
+          })
+          .then(book => book[0].bookshelfRender());
       });
     }
 
