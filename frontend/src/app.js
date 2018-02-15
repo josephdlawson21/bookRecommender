@@ -4,7 +4,7 @@ const App = (function() {
       const searchForm = document.getElementById("searchBar");
       // const recForm = document.getElementById("recommendBar");
       const logIn = document.getElementById("logIn");
-
+      App.wormBlink();
       //event listener for search form
       searchForm.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -67,26 +67,7 @@ const App = (function() {
           });
         });
       });
-
-      setInterval(function() {
-        document.getElementById("containerDiv").style.backgroundImage =
-          "url(pinkWorm20blink.png)";
-        console.log("blink");
-        setTimeout(function() {
-          document.getElementById("containerDiv").style.backgroundImage =
-            "url(pinkWorm20.png)";
-        }, 200);
-        setTimeout(function() {
-          document.getElementById("containerDiv").style.backgroundImage =
-            "url(pinkWorm20blink.png)";
-        }, 400);
-        setTimeout(function() {
-          document.getElementById("containerDiv").style.backgroundImage =
-            "url(pinkWorm20.png)";
-        }, 500);
-      }, 5000);
     }
-
     //////////   HELPER METHODS  ////////////////////////////////////////////////
 
     // creates a book object from the search/recommend json and renders
@@ -130,6 +111,17 @@ const App = (function() {
     }
     static clearLogin() {
       document.getElementById("userName").value = "";
+    }
+
+    static wormBlink() {
+      setInterval(function() {
+        document.getElementById("containerDiv").style.backgroundImage =
+          "url(pinkWorm20blink.png)";
+        setTimeout(function() {
+          document.getElementById("containerDiv").style.backgroundImage =
+            "url(pinkWorm20.png)";
+        }, 200);
+      }, 5000);
     }
   };
 })();
