@@ -20,30 +20,19 @@
             <label class="white-text" for="userName">Login</label>
           </form>
         </div></li>
-        <!-- <li><a></a></li>
-      </ul>
-      <ul class="left">
-        <li>
-          <img id="wormImage" src="worm.png" alt="logo">
-        </li>
-      </ul> -->
     </div>
   </nav>
   <div class="container">
   <div id="search">
     <div class="row">
-      <div class="col s6">
         <form id="searchBar" class="" action="index.html" method="post">
-          <input type="text" id="userInputSearch" name="userInputSearch" value="">
-          <input type="submit" name="submitSearch" class="btn waves-effect waves-light" value="Search">
+          <input type="text" id="userInputSearch" class="col s3" name="userInputSearch" value="">
+          <input id="searchButton" type="submit" name="submitSearch" class="btn waves-effect waves-light col s2" value="Search">
         </form>
-      </div>
-      <div class="col s6">
         <form id="recommendBar" class="" action="index.html" method="post">
-          <input type="text" id="userInputRecommend" name="userInputRecommend" value="">
-          <input type="submit" name="submitRecommend" class="btn waves-effect waves-light" value="Recommend">
+          <input type="text" id="userInputRecommend" class="col s3 offset-s1" name="userInputRecommend" value="">
+          <input id="recommendButton" type="submit" name="submitRecommend" class="btn waves-effect waves-light col s2" value="Recommend">
         </form>
-      </div>
     </div>
   </div>
   <h4 id="resultsHeader"class="red-text accent-1-text">Results</h4>
