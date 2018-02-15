@@ -37,7 +37,7 @@
 
 .container {
   background-image: url("pinkWorm20.png");
-  background-position: center;
+  background-position: top center;
   background-repeat: no-repeat;
   min-height: 800px;
 }
