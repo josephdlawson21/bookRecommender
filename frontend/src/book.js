@@ -134,13 +134,20 @@ const Book = (function() {
 
       // event listener for add book button
       addButton.addEventListener("click", function() {
-        let bookId = event.target.parentElement.dataset.googleId;
-        let userId = document.getElementById("userP").dataset.id;
-        Adapter.addBook(userId, bookId).then(json => {
-          let bookShelf = document.getElementById("bookshelf");
-          bookShelf.innerHTML = "";
-          App.parseBookshelfJson(json);
-        });
+        if (document.getElementById("userP")) {
+          let bookId = event.target.parentElement.dataset.googleId;
+          let userId = document.getElementById("userP").dataset.id;
+          Adapter.addBook(userId, bookId).then(json => {
+            let bookShelf = document.getElementById("bookshelf");
+            bookShelf.innerHTML = "";
+            App.parseBookshelfJson(json);
+          });
+        } else {
+          Materialize.toast(
+            "Please log in to add a book to your Bookshelf!",
+            4000
+          );
+        }
       });
       return addButton;
     }
