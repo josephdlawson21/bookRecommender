@@ -67,6 +67,24 @@ const App = (function() {
           });
         });
       });
+
+      setInterval(function() {
+        document.getElementById("containerDiv").style.backgroundImage =
+          "url(pinkWorm20blink.png)";
+        console.log("blink");
+        setTimeout(function() {
+          document.getElementById("containerDiv").style.backgroundImage =
+            "url(pinkWorm20.png)";
+        }, 200);
+        setTimeout(function() {
+          document.getElementById("containerDiv").style.backgroundImage =
+            "url(pinkWorm20blink.png)";
+        }, 400);
+        setTimeout(function() {
+          document.getElementById("containerDiv").style.backgroundImage =
+            "url(pinkWorm20.png)";
+        }, 500);
+      }, 5000);
     }
 
     //////////   HELPER METHODS  ////////////////////////////////////////////////

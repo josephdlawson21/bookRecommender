@@ -1,3 +1,8 @@
+body::after {
+  /* position:absolute; width:0; height:0; overflow:hidden; z-index:-1; */
+  content: url("pinkWorm20blink.png");
+}
+
 #wormImage {
   height: 60px;
   width: 60px;
