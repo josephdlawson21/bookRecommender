@@ -127,7 +127,6 @@ const App = (function() {
     }
     static clearInputFields() {
       document.getElementById("userInputSearch").value = "";
-      document.getElementById("userInputRecommend").value = "";
     }
     static clearLogin() {
       document.getElementById("userName").value = "";
