@@ -22,28 +22,11 @@ const Book = (function() {
         (this.description = description);
     }
 
+    //render methods
     renderSearch() {
       let card = document.createElement("div");
       card.className = "card col s12 m6 l4";
-
-      //add book button
-      let addButton = document.createElement("a");
-      addButton.dataset.googleId = this.googleId;
-      addButton.className =
-        "btn-floating right z-depth-4 waves-effect waves-light red bookShelf";
-      addButton.innerHTML = '<i class="material-icons btn-fix">add</i></a>';
-
-      // event listener for add book button
-      addButton.addEventListener("click", function() {
-        let bookId = event.target.parentElement.dataset.googleId;
-        let userId = document.getElementById("userP").dataset.id;
-        Adapter.addBook(userId, bookId).then(json => {
-          let bookShelf = document.getElementById("bookshelf");
-          bookShelf.innerHTML = "";
-          App.parseBookshelfJson(json);
-        });
-      });
-
+      let addButton = this.createAddBookButton();
       this.createCardImage(card);
       this.createContentDiv(card, addButton);
       this.createCardBack(card);
@@ -53,33 +36,14 @@ const Book = (function() {
     bookshelfRender(bookId) {
       let card = document.createElement("div");
       card.className = "card col s12 m6 l4";
-
-      //delete book button
-      let deleteButton = document.createElement("a");
-      deleteButton.dataset.googleId = this.googleId;
-      deleteButton.dataset.bookId = bookId;
-      deleteButton.className =
-        "btn-floating right z-depth-4 waves-effect waves-light red removeFromBookshelf";
-      deleteButton.innerHTML =
-        '<i class="material-icons btn-fix">delete</i></a>';
-
-      //event listener for delete book button
-      deleteButton.addEventListener("click", function() {
-        let bookId = event.target.parentElement.dataset.bookId;
-        let userId = document.getElementById("userP").dataset.id;
-        Adapter.deleteBook(userId, bookId).then(json => {
-          let bookShelf = document.getElementById("bookshelf");
-          bookShelf.innerHTML = "";
-          App.parseBookshelfJson(json);
-        });
-      });
-
+      let deleteButton = this.createDeleteButton(bookId);
       this.createCardImage(card);
       this.createContentDiv(card, deleteButton);
       this.createCardBack(card);
       document.getElementById("bookshelf").append(card);
     }
 
+    //helper methods
     createCardImage(card) {
       let cardImageDiv = document.createElement("div");
       cardImageDiv.className =
@@ -137,6 +101,48 @@ const Book = (function() {
       moreContent.append(moreInfo);
 
       card.append(moreContent);
+    }
+
+    createDeleteButton(bookId) {
+      let deleteButton = document.createElement("a");
+      deleteButton.dataset.googleId = this.googleId;
+      deleteButton.dataset.bookId = bookId;
+      deleteButton.className =
+        "btn-floating right z-depth-4 waves-effect waves-light red removeFromBookshelf";
+      deleteButton.innerHTML =
+        '<i class="material-icons btn-fix">delete</i></a>';
+
+      //event listener for delete book button
+      deleteButton.addEventListener("click", function() {
+        let bookId = event.target.parentElement.dataset.bookId;
+        let userId = document.getElementById("userP").dataset.id;
+        Adapter.deleteBook(userId, bookId).then(json => {
+          let bookShelf = document.getElementById("bookshelf");
+          bookShelf.innerHTML = "";
+          App.parseBookshelfJson(json);
+        });
+      });
+      return deleteButton;
+    }
+
+    createAddBookButton() {
+      let addButton = document.createElement("a");
+      addButton.dataset.googleId = this.googleId;
+      addButton.className =
+        "btn-floating right z-depth-4 waves-effect waves-light red bookShelf";
+      addButton.innerHTML = '<i class="material-icons btn-fix">add</i></a>';
+
+      // event listener for add book button
+      addButton.addEventListener("click", function() {
+        let bookId = event.target.parentElement.dataset.googleId;
+        let userId = document.getElementById("userP").dataset.id;
+        Adapter.addBook(userId, bookId).then(json => {
+          let bookShelf = document.getElementById("bookshelf");
+          bookShelf.innerHTML = "";
+          App.parseBookshelfJson(json);
+        });
+      });
+      return addButton;
     }
   };
 })();
