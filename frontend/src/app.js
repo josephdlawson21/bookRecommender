@@ -1,10 +1,9 @@
 const App = (function() {
   return class App {
     static init() {
-      const searchForm = document.getElementById("searchBar");
-      // const recForm = document.getElementById("recommendBar");
-      const logIn = document.getElementById("logIn");
       App.wormBlink();
+      const searchForm = document.getElementById("searchBar");
+      const logIn = document.getElementById("logIn");
       //event listener for search form
       searchForm.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -114,12 +113,13 @@ const App = (function() {
     }
 
     static wormBlink() {
+      let container = document.getElementById("containerDiv");
+      container.style.backgroundImage = "url(pinkWorm20blink.png)";
+      container.style.backgroundImage = "url(pinkWorm20.png)";
       setInterval(function() {
-        document.getElementById("containerDiv").style.backgroundImage =
-          "url(pinkWorm20blink.png)";
+        container.style.backgroundImage = "url(pinkWorm20blink.png)";
         setTimeout(function() {
-          document.getElementById("containerDiv").style.backgroundImage =
-            "url(pinkWorm20.png)";
+          container.style.backgroundImage = "url(pinkWorm20.png)";
         }, 200);
       }, 5000);
     }

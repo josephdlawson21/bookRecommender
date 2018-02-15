@@ -1,6 +1,11 @@
-body::after {
-  content: url("pinkWorm20blink.png");
-}
+/* body::after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  : url("pinkWorm20blink.png");
+} */
 
 #wormImage {
   height: 60px;
