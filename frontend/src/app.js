@@ -2,54 +2,54 @@ const App = (function() {
   return class App {
     static init() {
       const searchForm = document.getElementById("searchBar");
-      const recForm = document.getElementById("recommendBar");
+      // const recForm = document.getElementById("recommendBar");
       const logIn = document.getElementById("logIn");
 
-      //event listener for search book
+      //event listener for search form
       searchForm.addEventListener("submit", function(event) {
         event.preventDefault();
-        App.clearSearchResults();
-        let input = document.getElementById("userInputSearch").value;
-        Adapter.searchBook(input).then(json => {
-          if (json.items) {
-            let topFive = json.items.slice(0, 6);
-            let bookArr = App.parseJson(topFive);
-            App.renderSearchArr(bookArr);
-          } else {
-            let ul = document.getElementById("resultsA");
-            let p = document.createElement("p");
-            p.innerText = "no results";
-            ul.append(p);
-          }
-        });
-        App.clearInputFields();
-      });
 
-      //event listener for recomend book
-      recForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-        App.clearSearchResults();
-        let input = document.getElementById("userInputRecommend").value;
-        Adapter.recommendBooks(input).then(resultJson => {
-          let topFive = resultJson.Similar.Results.slice(0, 6);
-          if (topFive.length === 0) {
-            let ul = document.getElementById("resultsA");
-            let p = document.createElement("p");
-            p.innerText = "no results";
-            ul.append(p);
-            // Book.bookNotFound();
-          } else {
-            topFive.map(function(bookJSON) {
-              let search = bookJSON.Name;
-              Adapter.searchBook(search).then(json => {
-                let googleTopFive = json.items.slice(0, 1);
-                let bookArr = App.parseJson(googleTopFive);
-                App.renderSearchArr(bookArr);
+        if (document.getElementById("searchRadio").checked) {
+          App.clearSearchResults();
+          let input = document.getElementById("userInputSearch").value;
+          Adapter.searchBook(input).then(json => {
+            if (json.items) {
+              let topFive = json.items.slice(0, 6);
+              let bookArr = App.parseJson(topFive);
+              App.renderSearchArr(bookArr);
+            } else {
+              let ul = document.getElementById("resultsA");
+              let p = document.createElement("p");
+              p.innerText = "no results";
+              ul.append(p);
+            }
+          });
+          App.clearInputFields();
+        } else {
+          event.preventDefault();
+          App.clearSearchResults();
+          let input = document.getElementById("userInputSearch").value;
+          Adapter.recommendBooks(input).then(resultJson => {
+            let topFive = resultJson.Similar.Results.slice(0, 6);
+            if (topFive.length === 0) {
+              let ul = document.getElementById("resultsA");
+              let p = document.createElement("p");
+              p.innerText = "no results";
+              ul.append(p);
+              // Book.bookNotFound();
+            } else {
+              topFive.map(function(bookJSON) {
+                let search = bookJSON.Name;
+                Adapter.searchBook(search).then(json => {
+                  let googleTopFive = json.items.slice(0, 1);
+                  let bookArr = App.parseJson(googleTopFive);
+                  App.renderSearchArr(bookArr);
+                });
               });
-            });
-          }
-        });
-        App.clearInputFields();
+            }
+          });
+          App.clearInputFields();
+        }
       });
 
       logIn.addEventListener("submit", function(event) {

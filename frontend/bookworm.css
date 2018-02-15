@@ -19,6 +19,14 @@
   margin-top: 30px;
 }
 
+#searchRadio {
+  display: inline-block;
+}
+
+#recommendRadio {
+  display: inline-block;
+}
+
 .spanFix {
   width: 200px;
   white-space: nowrap;
