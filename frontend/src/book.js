@@ -26,7 +26,7 @@ const Book = (function() {
       let card = document.createElement("div");
       card.className = "card col s12 m6 l4";
 
-      //add button
+      //add book button
       let addButton = document.createElement("a");
       addButton.dataset.googleId = this.googleId;
       addButton.className =
@@ -44,7 +44,7 @@ const Book = (function() {
         });
       });
 
-      this.renderCardImage(card);
+      this.createCardImage(card);
       this.createContentDiv(card, addButton);
       this.createCardBack(card);
       document.getElementById("resultsA").append(card);
@@ -54,7 +54,7 @@ const Book = (function() {
       let card = document.createElement("div");
       card.className = "card col s12 m6 l4";
 
-      //delete button
+      //delete book button
       let deleteButton = document.createElement("a");
       deleteButton.dataset.googleId = this.googleId;
       deleteButton.dataset.bookId = bookId;
@@ -74,13 +74,13 @@ const Book = (function() {
         });
       });
 
-      this.renderCardImage(card);
+      this.createCardImage(card);
       this.createContentDiv(card, deleteButton);
       this.createCardBack(card);
       document.getElementById("bookshelf").append(card);
     }
 
-    renderCardImage(card) {
+    createCardImage(card) {
       let cardImageDiv = document.createElement("div");
       cardImageDiv.className =
         "card-image waves-effect waves-block waves-light";
