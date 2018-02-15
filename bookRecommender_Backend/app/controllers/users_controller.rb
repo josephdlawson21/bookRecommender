@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.find_or_create_by(name: params[:name])
-    render json: @user, status: 200
+    render json: @user, status: 201
   end
 
   def getBooks
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       @user.books << @book
     end
 
-    render json: @user.books, status: 200
+    render json: @user.books, status: 201
 
   end
 
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @user_book = UserBook.find_by(user_id: params[:userId], book_id: params[:id])
     UserBook.destroy(@user_book.id)
     @user = User.find(params[:userId])
-    render json: @user.books, status: 200
+    render json: @user.books, status: 201
   end
 
   private
