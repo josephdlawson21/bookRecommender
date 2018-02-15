@@ -3,6 +3,18 @@
   width: 60px;
 }
 
+#resultsA {
+  min-height: 250px;
+}
+
+#bookshelf {
+  min-height: 250px;
+}
+
+#resultsHeader {
+  margin-top: 50px;
+}
+
 .spanFix {
   width: 200px;
   white-space: nowrap;
@@ -17,4 +29,11 @@
 
 .btn-fix {
   line-height: inherit !important;
+}
+
+.container {
+  background-image: url("pinkWorm20.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 800px;
 }
